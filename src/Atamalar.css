@@ -1,0 +1,104 @@
+﻿body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #eef2f5;
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+}
+
+.siparisler-container {
+    max-width: 1300px;
+    margin: 40px auto;
+    padding: 40px 32px;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+h2 {
+    font-size: 28px;
+    margin-bottom: 28px;
+    color: #1a202c;
+    font-weight: 700;
+}
+
+button {
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    font-size: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+    button:hover {
+        background-color: #1d4ed8;
+        transform: translateY(-1px);
+    }
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 24px;
+    border-radius: 16px;
+    overflow: hidden;
+    background-color: white;
+}
+
+th {
+    background-color: #f8fafc;
+    color: #111827;
+    font-weight: 600;
+    padding: 16px;
+    font-size: 15px;
+    text-align: left;
+    border-bottom: 2px solid #e2e8f0;
+    white-space: nowrap;
+}
+
+td {
+    padding: 14px 16px;
+    border-bottom: 1px solid #f1f5f9;
+    color: #374151;
+    font-size: 14px;
+}
+
+tr.group-header {
+    background-color: #f9fafb;
+    font-weight: 600;
+}
+
+tr.group-row {
+    background-color: #ffffff;
+    color: #6b7280;
+    font-style: italic;
+}
+
+tr:hover {
+    background-color: #f0f8ff;
+}
+
+input[type="text"], select {
+    width: 100%;
+    padding: 10px;
+    margin: 6px 0;
+    border-radius: 10px;
+    border: 1px solid #cbd5e1;
+    font-size: 14px;
+    box-sizing: border-box;
+    background-color: #f9fafb;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+    select:focus, input:focus {
+        border-color: #3b82f6;
+        outline: none;
+        box-shadow: 0 0 6px rgba(59, 130, 246, 0.4);
+    }
+
+.tablo-wrapper {
+    overflow-x: auto;
+    margin-top: 16px;
+}

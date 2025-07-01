@@ -1,0 +1,125 @@
+/* Sayfa düzeni */
+.page-container {
+    padding: 1rem 2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9fafb;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Başlık */
+.title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 1.5rem;
+}
+
+/* Tablo kutusu */
+.table-wrapper {
+    overflow: auto;
+    max-height: 90vh;
+    border-radius: 12px;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
+    background-color: #ffffff;
+    padding: 1rem;
+    border: 1px solid #e5e7eb;
+}
+
+/* Tablo */
+.sefer-table {
+    width: 100%;
+    min-width: 1600px;
+    border-collapse: collapse;
+    font-size: 16px; /* ← yazı büyütüldü */
+    color: #374151;
+    line-height: 1.6; /* ← satır yüksekliği */
+}
+
+    /* Başlık hücreleri */
+    .sefer-table thead th {
+        position: sticky;
+        top: 0;
+        background-color: #f3f4f6;
+        color: #1f2937;
+        text-align: left;
+        padding: 16px 20px; /* ← padding artırıldı */
+        font-weight: 600;
+        border-bottom: 1px solid #e5e7eb;
+        white-space: nowrap;
+        z-index: 1;
+    }
+
+    /* Satır geçiş efekti */
+    .sefer-table tbody tr {
+        transition: background-color 0.2s ease;
+    }
+
+        .sefer-table tbody tr:hover {
+            background-color: #f0f9ff;
+        }
+
+    /* Hücreler */
+    .sefer-table td {
+        padding: 14px 20px; /* ← hücre içi boşluk artırıldı */
+        border-bottom: 1px solid #f3f4f6;
+        white-space: nowrap;
+        vertical-align: middle;
+    }
+
+    /* Alternatif satır rengi */
+    .sefer-table tbody tr:nth-child(even) {
+        background-color: #fcfcfd;
+    }
+
+/* Scrollbar stil */
+.table-wrapper::-webkit-scrollbar {
+    height: 14px;
+    width: 10px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb {
+    background-color: #cbd5e1;
+    border-radius: 4px;
+}
+
+.table-wrapper::-webkit-scrollbar-track {
+    background: transparent;
+}
+.grup-satir {
+    background-color: #f3f4f6;
+    font-weight: 600;
+}
+
+    .grup-satir:hover {
+        background-color: #e0f2fe;
+    }
+
+.detay-icerik {
+    background: #fff7ed;
+    border-left: 4px solid #fb923c;
+    padding: 1rem;
+    border-radius: 6px;
+    font-size: 14px;
+}
+.konum-btn {
+    background-color: #f59e0b;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+    .konum-btn:hover {
+        background-color: #d97706;
+    }
+/* react-select iyileştirmesi */
+.sefer-table td .css-13cymwt-control {
+    min-height: 36px;
+    font-size: 14px;
+}
+
+

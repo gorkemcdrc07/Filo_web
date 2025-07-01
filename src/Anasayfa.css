@@ -1,0 +1,68 @@
+﻿.dashboard {
+    min-height: 100vh;
+    padding: 40px 20px;
+    background: linear-gradient(to bottom right, #f9fafb, #e5e7eb);
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dashboard-title {
+    font-size: 30px;
+    color: #111827;
+    margin-bottom: 40px;
+    font-weight: 600;
+    text-align: center;
+    position: relative;
+}
+
+.dashboard-buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 24px;
+    width: 100%;
+    max-width: 1000px;
+    margin-bottom: 60px;
+}
+
+    .dashboard-buttons button {
+        padding: 18px;
+        background: linear-gradient(135deg, #3b82f6, #2563eb);
+        color: white;
+        border: none;
+        font-size: 16px;
+        font-weight: 500;
+        border-radius: 12px;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+        transition: all 0.3s ease;
+    }
+
+        .dashboard-buttons button:hover {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(30, 64, 175, 0.25);
+        }
+
+.raporlar-bolumu {
+    background: white;
+    padding: 25px 30px;
+    border-radius: 16px;
+    max-width: 600px;
+    width: 100%;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    text-align: center;
+    border: 1px solid #e5e7eb;
+}
+
+    .raporlar-bolumu h2 {
+        font-size: 20px;
+        margin-bottom: 10px;
+        color: #1f2937;
+    }
+
+    .raporlar-bolumu p {
+        color: #6b7280;
+        font-size: 14px;
+    }

@@ -1,0 +1,519 @@
+/* 🎨 Genel Stil */
+.reel-wrapper {
+    padding: 2rem;
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f1f3f5;
+    min-height: 100vh;
+}
+
+/* 🔍 Filtre Alanı */
+.reel-filters {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    background-color: #ffffff;
+    padding: 1.5rem 1.5rem 1rem 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    margin-bottom: 1.5rem;
+    align-items: end;
+}
+
+    .reel-filters .filter-block {
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+    }
+
+        .reel-filters .filter-block.full-width {
+            grid-column: span 4;
+        }
+
+    .reel-filters label {
+        font-size: 0.72rem;
+        font-weight: 600;
+        color: #495057;
+        text-transform: uppercase;
+        letter-spacing: 0.4px;
+    }
+
+    .reel-filters input,
+    .reel-filters select {
+        padding: 0.45rem 0.6rem;
+        font-size: 0.88rem;
+        border-radius: 8px;
+        border: 1px solid #ced4da;
+        background-color: #fff;
+        color: #212529;
+    }
+
+    .reel-filters .filter-buttons {
+        grid-column: span 4;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0.75rem;
+    }
+.filter-buttons .left-buttons {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.filter-buttons .toggle-button {
+    margin-left: auto;
+}
+        /* 🌟 Modern Butonlar */
+        .reel-filters .filter-buttons .btn {
+            padding: 0.55rem 1.3rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+        }
+
+/* 🎨 Renk Kodlu */
+.btn-list {
+    background: linear-gradient(135deg, #e3fafc, #99e9f2);
+    color: #0b7285;
+    border: 1px solid #66d9e8;
+}
+
+    .btn-list:hover {
+        background: linear-gradient(135deg, #66d9e8, #3bc9db);
+        color: white;
+    }
+
+.btn-sync {
+    background: linear-gradient(135deg, #fff3bf, #ffe066);
+    color: #7c6f00;
+    border: 1px solid #ffd43b;
+}
+
+    .btn-sync:hover {
+        background: linear-gradient(135deg, #ffd43b, #fab005);
+        color: white;
+    }
+
+.btn-save {
+    background: linear-gradient(135deg, #d3f9d8, #69db7c);
+    color: #2f9e44;
+    border: 1px solid #8ce99a;
+}
+
+    .btn-save:hover {
+        background: linear-gradient(135deg, #51cf66, #37b24d);
+        color: white;
+    }
+
+.btn:disabled {
+    background: #dee2e6 !important;
+    color: #adb5bd !important;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* 🎛️ Gelişmiş Filtreleri Göster/Gizle Butonu */
+.toggle-advanced {
+    padding: 0.55rem 1.2rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 8px;
+    border: 2px dashed #228be6;
+    color: #228be6;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+    .toggle-advanced:hover {
+        background-color: #e7f5ff;
+        color: #1c7ed6;
+        border-color: #1c7ed6;
+    }
+
+/* Responsive düzeltmeler */
+@media (max-width: 992px) {
+    .reel-filters {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+        .reel-filters .filter-block.full-width {
+            grid-column: span 2;
+        }
+}
+
+@media (max-width: 576px) {
+    .reel-filters {
+        grid-template-columns: 1fr;
+    }
+
+        .reel-filters .filter-block.full-width {
+            grid-column: span 1;
+        }
+}
+
+/* 🧩 React Select */
+.Select__menu {
+    z-index: 9999 !important;
+}
+
+.css-13cymwt-control,
+.css-1nmdiq5-control {
+    min-height: 40px;
+    font-size: 0.95rem;
+}
+
+/* 📊 Tablo Alanı */
+.reel-table-container {
+    width: 100%;
+    max-height: 75vh;
+    overflow: auto;
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    border: none;
+}
+
+/* 🧾 Tablo Yapısı */
+.reel-table {
+    width: max-content;
+    min-width: 100%;
+    border-collapse: collapse;
+    table-layout: auto;
+}
+
+.reel-th,
+.reel-td {
+    padding: 10px 14px;
+    font-size: 0.85rem;
+    text-align: left;
+    vertical-align: top;
+    border: 1px solid #dee2e6;
+    white-space: normal !important;
+    word-break: break-word !important;
+    overflow-wrap: anywhere !important;
+    max-width: 600px;
+}
+
+.reel-th {
+    background-color: #f1f3f5;
+    color: #212529;
+    font-weight: 600;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    text-transform: uppercase;
+}
+
+/* ✅ Durum Etiketleri */
+.reel-durum-badge {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.75rem;
+    color: white;
+    display: inline-block;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+}
+
+.reel-durum-eslesti {
+    background-color: #2b8a3e;
+}
+
+.reel-durum-yeni {
+    background-color: #51cf66;
+    color: #0b2e13;
+}
+
+.reel-durum-yok {
+    background-color: #fa5252;
+}
+
+.reel-durum-default {
+    background-color: #adb5bd;
+}
+
+/* 🖥️ Responsive Scroll */
+@media (max-width: 768px) {
+    .reel-filters {
+        grid-template-columns: 1fr;
+    }
+
+        .reel-filters .filter-block.full-width {
+            grid-column: span 1;
+        }
+
+    .reel-table {
+        font-size: 0.8rem;
+    }
+}
+
+/* 🔄 Yükleniyor Overlay */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.85);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(3px);
+}
+
+.loading-box {
+    background: white;
+    padding: 2rem 3rem;
+    border-radius: 16px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #333;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.spinner {
+    width: 42px;
+    height: 42px;
+    border: 4px solid #d0ebff;
+    border-top: 4px solid #228be6;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ✅ Toast */
+.success-toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #38a169;
+    color: #fff;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    z-index: 9999;
+    animation: fadeInOut 4s ease-in-out forwards;
+}
+
+.success-icon {
+    font-size: 1.4rem;
+    background-color: #fff;
+    color: #38a169;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.success-message {
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    10%, 90% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+
+/* 📄 Detay Satırları */
+.detail-row td {
+    background-color: #f9fafb;
+    padding: 20px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.detail-container-rows {
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+.detail-row-item {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 12px;
+}
+
+.detail-item {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 12px 16px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    color: #4b5563;
+    flex: 1;
+}
+
+.detail-key {
+    font-weight: 600;
+    font-size: 0.85em;
+    margin-bottom: 6px;
+    color: #6b7280;
+    text-transform: uppercase;
+}
+
+.detail-value {
+    font-size: 1em;
+    line-height: 1.4;
+    color: #374151;
+    white-space: pre-wrap;
+}
+
+/* ⚠ Uyarı Popup */
+.uyari-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fef2f2;
+    border: 2px solid #f87171;
+    padding: 20px 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    z-index: 1000;
+    color: #7f1d1d;
+    text-align: center;
+    animation: fadeIn 0.2s ease-out;
+}
+
+.uyari-icerik p {
+    margin-top: 8px;
+    font-size: 1em;
+}
+
+/* 🎯 Gelişmiş Filtre Paneli */
+.advanced-filters {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+    background: #ffffff;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    margin-top: 1rem;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+    .advanced-filters .filter-block {
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+    }
+
+    .advanced-filters label {
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: #495057;
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
+    }
+
+    .advanced-filters input,
+    .advanced-filters select {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.9rem;
+        border-radius: 8px;
+        border: 1px solid #ced4da;
+        background-color: #f8f9fa;
+        color: #212529;
+        transition: all 0.2s ease;
+    }
+
+        .advanced-filters input:focus,
+        .advanced-filters select:focus {
+            border-color: #228be6;
+            box-shadow: 0 0 0 3px rgba(34, 139, 230, 0.15);
+            outline: none;
+        }
+.sabit-sayac {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #f1f5f9;
+    color: #1e293b;
+    padding: 12px 24px;
+    font-weight: 600;
+    font-size: 18px; /* 🔼 Burayı büyüttük */
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    border-top: 2px solid #cbd5e1;
+}
+
+.sayac-icerik {
+    max-width: 1280px;
+    width: 100%;
+    text-align: center;
+    font-size: 1.2em; /* 🔼 Ekstra büyütme */
+    letter-spacing: 0.3px;
+}
+.btn-clear {
+    background-color: #f87171;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+    .btn-clear:hover {
+        background-color: #dc2626;
+    }
+
+
+

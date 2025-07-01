@@ -1,0 +1,101 @@
+.kesinti-container {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 20px;
+    flex-wrap: wrap;
+}
+
+.kesinti-form {
+    flex: 1;
+    min-width: 300px;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+    .kesinti-form h2 {
+        text-align: center;
+    }
+
+    .kesinti-form label {
+        font-weight: bold;
+    }
+
+    .kesinti-form input,
+    .kesinti-form select,
+    .kesinti-form textarea {
+        padding: 8px;
+        font-size: 14px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        width: 100%;
+    }
+
+    .kesinti-form button {
+        background-color: #007bff;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+        .kesinti-form button:hover {
+            background-color: #0056b3;
+        }
+
+.kesinti-tablo-wrapper {
+    flex: 2;
+    min-width: 500px;
+    overflow-x: auto;
+}
+
+.kesinti-tablo {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+    .kesinti-tablo th,
+    .kesinti-tablo td {
+        padding: 8px;
+        border: 1px solid #ddd;
+        text-align: center;
+    }
+
+    .kesinti-tablo th {
+        background-color: #f1f1f1;
+    }
+
+    .kesinti-tablo button {
+        background-color: #dc3545;
+        color: white;
+        padding: 6px 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+        .kesinti-tablo button:hover {
+            background-color: #c82333;
+        }
+
+/* Responsive */
+@media (max-width: 900px) {
+    .kesinti-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .kesinti-form,
+    .kesinti-tablo-wrapper {
+        max-width: 100%;
+    }
+}
