@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useMemo } from 'react';import Select from 'react-select';
 import { supabase } from '../supabaseClient';
 import './ReelAtananSeferler.css';
+import { useNavigate } from 'react-router-dom';
+
 
 
 
@@ -30,6 +32,40 @@ function ReelAtananSeferler() {
     const [teslimIlce, setTeslimIlce] = useState('');
     const [atamaYapan, setAtamaYapan] = useState('');
     const [noktaSayisi, setNoktaSayisi] = useState('');
+    const [columns, setColumns] = useState([]);
+    const navigate = useNavigate();
+
+
+    const [draggedColumn, setDraggedColumn] = useState(null);
+    useEffect(() => {
+  const savedCols = localStorage.getItem('seferlerColumns');
+  if (savedCols) {
+    setColumns(JSON.parse(savedCols));
+  }
+}, []);
+
+
+const handleDragStart = (col) => {
+  setDraggedColumn(col);
+};
+
+const handleDrop = (targetCol) => {
+  if (!draggedColumn || draggedColumn === targetCol) return;
+
+  const updated = [...columns];
+  const fromIndex = updated.indexOf(draggedColumn);
+  const toIndex = updated.indexOf(targetCol);
+
+  updated.splice(fromIndex, 1);
+  updated.splice(toIndex, 0, draggedColumn);
+
+  setColumns(updated);
+  setDraggedColumn(null);
+};
+
+const allowDrop = (e) => e.preventDefault();
+
+
 
     const filtreleriTemizle = () => {
         setAracStatu('');
@@ -206,7 +242,35 @@ const aracStatuOptions = useMemo(() => {
 
 
   setVeriler(birlesmis);
- };
+   // 🔹 Kolon sıralaması için default kolonları ayarla
+  if (birlesmis.length > 0) {
+  const defaultCols = Object.keys(birlesmis[0])
+    .filter(key =>
+      key !== 'reel_durum' &&
+      key !== 'sefer_detaylari' &&
+      !['yukleme_varis', 'yukleme_cikis', 'teslim_varis', 'teslim_cikis'].includes(key)
+    );
+
+  const savedCols = localStorage.getItem('seferlerColumns');
+  if (savedCols) {
+    try {
+      const parsed = JSON.parse(savedCols);
+      if (Array.isArray(parsed)) {
+        setColumns(parsed);
+      } else {
+        setColumns(defaultCols);
+      }
+    } catch {
+      setColumns(defaultCols);
+    }
+  } else {
+    setColumns(defaultCols);
+  }
+}
+
+};
+
+
     const sayacBilgisi = (data) => {
         const toplam = data.length;
         const bosSayisi = data.filter(d => (d.sefer_no || '').toUpperCase().startsWith('BOS')).length;
@@ -214,6 +278,8 @@ const aracStatuOptions = useMemo(() => {
 
         return { toplam, bosSayisi, sfrSayisi };
     };
+
+
 
 
 
@@ -634,8 +700,17 @@ const splitCell = (value) => {
 };
 
     return (
-
         <div className="reel-wrapper">
+            {/* ← Geri Butonu */}
+            <div className="geri-buton-container">
+                <button
+                    className="geri-buton"
+                    onClick={() => navigate(-1)}
+                >
+                    ← Geri
+                </button>
+            </div>
+
             {uyariGoster && (
                 <div className="uyari-popup">
                     <div className="uyari-icerik">
@@ -645,24 +720,24 @@ const splitCell = (value) => {
                 </div>
             )}
 
+            {isLoading && (
+                <div className="loading-overlay">
+                    <div className="loading-box">
+                        <div className="spinner" />
+                        <span>Veriler senkronize ediliyor...</span>
+                    </div>
+                </div>
+            )}
 
-      {isLoading && (
-        <div className="loading-overlay">
-          <div className="loading-box">
-            <div className="spinner" />
-            <span>Veriler senkronize ediliyor...</span>
-          </div>
-        </div>
-      )}
+            {showSuccess && (
+                <div className="success-toast">
+                    <div className="success-icon">✔</div>
+                    <div className="success-message">
+                        {successCount} sefer başarıyla senkronize edildi.
+                    </div>
+                </div>
+            )}
 
-      {showSuccess && (
-        <div className="success-toast">
-          <div className="success-icon">✔</div>
-          <div className="success-message">
-            {successCount} sefer başarıyla senkronize edildi.
-          </div>
-        </div>
-      )}
 
             <div className="reel-filters">
                 {/* TEMEL ALANLAR */}
@@ -676,24 +751,38 @@ const splitCell = (value) => {
                     <input type="date" value={endDate} onChange={e => setEndDate(e.target.value)} />
                 </div>
 
-               <div className="filter-buttons">
+              <div className="filter-buttons">
   <div className="left-buttons">
-<button className="btn btn-list" onClick={fetchFromDB}>
-  📥 Listele
-</button>
-<button className="btn btn-sync" onClick={senkronizeEt}>
-  🔄 Senkronize Et
-</button>
+    <button className="btn btn-list" onClick={fetchFromDB}>
+      📥 Listele
+    </button>
+    <button className="btn btn-sync" onClick={senkronizeEt}>
+      🔄 Senkronize Et
+    </button>
+    <button className="btn btn-save" disabled={saving} onClick={detaylariKaydet}>
+      💾 {saving ? 'Kaydediliyor...' : 'Detayları Kaydet'}
+    </button>
 
-<button className="btn btn-save" disabled={saving} onClick={detaylariKaydet}>
-  💾 {saving ? 'Kaydediliyor...' : 'Detayları Kaydet'}
-</button>
+    {/* 💾 Görünüm Kaydet Butonu */}
+    <button
+      className="btn btn-clear"
+      onClick={() => {
+        localStorage.setItem('seferlerColumns', JSON.stringify(columns));
+        alert('🧷 Görünüm kaydedildi!');
+      }}
+    >
+      💾 Görünüm Kaydet
+    </button>
   </div>
 
-  <button className="toggle-advanced toggle-button" onClick={() => setShowAdvancedFilters(!showAdvancedFilters)}>
+  <button
+    className="toggle-advanced toggle-button"
+    onClick={() => setShowAdvancedFilters(!showAdvancedFilters)}
+  >
     {showAdvancedFilters ? '🔼 Gelişmiş Filtreleri Gizle' : '🔽 Gelişmiş Filtreleri Göster'}
   </button>
 </div>
+
 
             </div>
 
@@ -895,15 +984,20 @@ const splitCell = (value) => {
                     <th className="reel-th">NOKTA SAYISI</th>
 
 
-                              {Object.keys(veriler[0])
-                                  .filter(key =>
-                                      key !== 'reel_durum' &&
-                                      key !== 'sefer_detaylari' &&
-                                      !['yukleme_varis', 'yukleme_cikis', 'teslim_varis', 'teslim_cikis'].includes(key)
-                                  )
-                                  .map((key, idx) => (
-                                      <th key={idx} className="reel-th">{key.replace(/_/g, ' ').toUpperCase()}</th>
-                                  ))}
+                             {columns.map((key) => (
+  <th
+    key={key}
+    className="reel-th"
+    draggable
+    onDragStart={() => handleDragStart(key)}
+    onDragOver={allowDrop}
+    onDrop={() => handleDrop(key)}
+    style={{ cursor: 'move' }}
+  >
+    {key.replace(/_/g, ' ').toUpperCase()}
+  </th>
+))}
+
               </tr>
             </thead>
             <tbody>
@@ -923,15 +1017,10 @@ const splitCell = (value) => {
         <td className="reel-td">{durumEtiketi(v.reel_durum)}</td>
         <td className="reel-td">{v.nokta_sayisi}</td>
 
-              {Object.entries(v)
-                  .filter(([key, value]) =>
-                      key !== 'reel_durum' &&
-                      typeof value !== 'object' &&
-                      !['sefer_detaylari', 'yukleme_varis', 'yukleme_cikis', 'teslim_varis', 'teslim_cikis'].includes(key)
-                  )
-                  .map(([key, value], idx) => (
-                      <td key={idx} className="reel-td">{formatCell(value)}</td>
-                  ))}
+             {columns.map((key, idx) => (
+  <td key={idx} className="reel-td">{formatCell(v[key])}</td>
+))}
+
       </tr>
 
       {isExpanded && (() => {

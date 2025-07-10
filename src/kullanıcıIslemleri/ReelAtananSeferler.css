@@ -4,6 +4,7 @@
     font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f1f3f5;
     min-height: 100vh;
+    padding-top: 55px; /* Geri buton için boşluk bırakır */
 }
 
 /* 🔍 Filtre Alanı */
@@ -17,6 +18,7 @@
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
     margin-bottom: 1.5rem;
     align-items: end;
+    padding-top: 48px; /* Geri butonun üstünü boşaltır */
 }
 
     .reel-filters .filter-block {
@@ -513,6 +515,31 @@
 
     .btn-clear:hover {
         background-color: #dc2626;
+    }
+
+/* Geri butonu sabit pozisyonda, her zaman sol üstte */
+.geri-buton-container {
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 9999;
+}
+
+/* Geri buton tasarımı */
+.geri-buton {
+    background-color: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    color: #1e293b;
+    transition: all 0.2s ease-in-out;
+}
+
+    .geri-buton:hover {
+        background-color: #e2e8f0;
     }
 
 

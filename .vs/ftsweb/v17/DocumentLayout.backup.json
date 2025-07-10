@@ -7,12 +7,20 @@
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\kullan\u0131c\u0131Islemleri\\ReelAtananSeferler.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Gorkem.Cadirci\\ftsweb\\src\\kullan\u0131c\u0131Islemleri\\ReelAtananSeferler.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\kullan\u0131c\u0131Islemleri\\ReelAtananSeferler.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Gorkem.Cadirci\\ftsweb\\src\\supabaseClient.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\supabaseClient.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Gorkem.Cadirci\\ftsweb\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Gorkem.Cadirci\\ftsweb\\server\\server.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:server\\server.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Gorkem.Cadirci\\ftsweb\\src\\kullan\u0131c\u0131Islemleri\\ReelAtananSeferler.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\kullan\u0131c\u0131Islemleri\\ReelAtananSeferler.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -34,38 +42,63 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "supabaseClient.js",
+              "DocumentMoniker": "C:\\Users\\Gorkem.Cadirci\\ftsweb\\src\\supabaseClient.js",
+              "RelativeDocumentMoniker": "src\\supabaseClient.js",
+              "ToolTip": "C:\\Users\\Gorkem.Cadirci\\ftsweb\\src\\supabaseClient.js",
+              "RelativeToolTip": "src\\supabaseClient.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-07-01T13:03:49.535Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": ".gitignore",
+              "DocumentMoniker": "C:\\Users\\Gorkem.Cadirci\\ftsweb\\.gitignore",
+              "RelativeDocumentMoniker": ".gitignore",
+              "ToolTip": "C:\\Users\\Gorkem.Cadirci\\ftsweb\\.gitignore",
+              "RelativeToolTip": ".gitignore",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-07-01T13:00:08.451Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
               "Title": "ReelAtananSeferler.js",
               "DocumentMoniker": "C:\\Users\\Gorkem.Cadirci\\ftsweb\\src\\kullan\u0131c\u0131Islemleri\\ReelAtananSeferler.js",
               "RelativeDocumentMoniker": "src\\kullan\u0131c\u0131Islemleri\\ReelAtananSeferler.js",
               "ToolTip": "C:\\Users\\Gorkem.Cadirci\\ftsweb\\src\\kullan\u0131c\u0131Islemleri\\ReelAtananSeferler.js",
               "RelativeToolTip": "src\\kullan\u0131c\u0131Islemleri\\ReelAtananSeferler.js",
-              "ViewState": "AgIAAKEDAAAAAAAAAAAowNcDAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAANYAAAAAAAAAAAAWwAUBAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
               "WhenOpened": "2025-06-19T07:14:00.847Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "server.js",
               "DocumentMoniker": "C:\\Users\\Gorkem.Cadirci\\ftsweb\\server\\server.js",
               "RelativeDocumentMoniker": "server\\server.js",
               "ToolTip": "C:\\Users\\Gorkem.Cadirci\\ftsweb\\server\\server.js",
               "RelativeToolTip": "server\\server.js",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAkwDwAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
               "WhenOpened": "2025-06-24T09:25:17.953Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "ReelAtananSeferler.css",
               "DocumentMoniker": "C:\\Users\\Gorkem.Cadirci\\ftsweb\\src\\kullan\u0131c\u0131Islemleri\\ReelAtananSeferler.css",
               "RelativeDocumentMoniker": "src\\kullan\u0131c\u0131Islemleri\\ReelAtananSeferler.css",
               "ToolTip": "C:\\Users\\Gorkem.Cadirci\\ftsweb\\src\\kullan\u0131c\u0131Islemleri\\ReelAtananSeferler.css",
               "RelativeToolTip": "src\\kullan\u0131c\u0131Islemleri\\ReelAtananSeferler.css",
-              "ViewState": "AgIAABUAAAAAAAAAAAAawEEAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAANoBAAAAAAAAAAAqwAQCAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
               "WhenOpened": "2025-06-19T07:16:24.723Z"
             }

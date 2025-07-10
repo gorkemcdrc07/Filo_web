@@ -69,3 +69,26 @@
     .plaka-button:hover {
         background-color: #0056b3;
     }
+
+.geri-buton-container {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+}
+
+.geri-buton {
+    background-color: #e2e8f0;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+    .geri-buton:hover {
+        background-color: #cbd5e1;
+    }
+

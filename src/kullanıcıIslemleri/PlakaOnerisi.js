@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import HaritaPopupMulti from '../components/HaritaPopupMulti';
 import './PlakaOnerisi.css'; // CSS dosyası aşağıda
+import { useNavigate } from 'react-router-dom';
+
 
 function PlakaOnerisi() {
     const [il, setIl] = useState('');
@@ -10,6 +12,8 @@ function PlakaOnerisi() {
     const [araclar, setAraclar] = useState([]);
     const [enYakinAraclar, setEnYakinAraclar] = useState([]);
     const [haritaAcik, setHaritaAcik] = useState(false);
+    const navigate = useNavigate();
+
 
     useEffect(() => {
         const saved = JSON.parse(localStorage.getItem('plaka-oneri'));
@@ -101,6 +105,13 @@ function PlakaOnerisi() {
 
     return (
         <div className="plaka-container">
+            {/* Geri Butonu - Sol Üst */}
+            <div className="geri-buton-container">
+                <button className="geri-buton" onClick={() => navigate(-1)}>
+                    ← Geri
+                </button>
+            </div>
+
             <div className="plaka-card">
                 <h1 className="plaka-title">Plaka Önerisi</h1>
                 <p className="plaka-desc">Yükleme il ve ilçesini girin, en yakın araçları önerelim.</p>
@@ -142,6 +153,7 @@ function PlakaOnerisi() {
             )}
         </div>
     );
+
 }
 
 export default PlakaOnerisi;
