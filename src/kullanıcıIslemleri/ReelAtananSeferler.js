@@ -38,11 +38,23 @@ function ReelAtananSeferler() {
 
     const [draggedColumn, setDraggedColumn] = useState(null);
     useEffect(() => {
-  const savedCols = localStorage.getItem('seferlerColumns');
-  if (savedCols) {
-    setColumns(JSON.parse(savedCols));
-  }
-}, []);
+        const fetchUserView = async () => {
+            const kullaniciId = parseInt(localStorage.getItem('kullaniciId'));
+            if (!kullaniciId) return;
+
+            const { data, error } = await supabase
+                .from('kullanici_gorunumleri')
+                .select('gorunum')
+                .eq('kullanici_id', kullaniciId)
+                .single();
+
+            if (!error && data?.gorunum) {
+                setColumns(data.gorunum);
+            }
+        };
+
+        fetchUserView();
+    }, []);
 
 
 const handleDragStart = (col) => {
@@ -171,104 +183,91 @@ const aracStatuOptions = useMemo(() => {
 
 
 
- const fetchFromDB = async () => {
-  if (!startDate || !endDate) return;
+    const fetchFromDB = async () => {
+        if (!startDate || !endDate) return;
 
-  let query = supabase
-    .from('seferler')
-    .select('*, sefer_detaylari(*)')
-    .gte('sefer_tarihi', `${startDate}T00:00:00`)
-    .lte('sefer_tarihi', `${endDate}T23:59:59`)
-    .order('sefer_tarihi', { ascending: false });
+        let query = supabase
+            .from('seferler')
+            .select('*, sefer_detaylari(*)')
+            .gte('sefer_tarihi', `${startDate}T00:00:00`)
+            .lte('sefer_tarihi', `${endDate}T23:59:59`)
+            .order('sefer_tarihi', { ascending: false });
 
-  if (secilenSeferler.length > 0) {
-    const seferNoList = secilenSeferler.map(item => item.value.trim());
-    query = query.in('sefer_no', seferNoList);
-  }
+        if (secilenSeferler.length > 0) {
+            const seferNoList = secilenSeferler.map(item => item.value.trim());
+            query = query.in('sefer_no', seferNoList);
+        }
 
-  const { data, error } = await query;
+        const { data, error } = await query;
 
-  if (error) {
-    console.error('Veri çekme hatası:', error);
-    return;
-  }
+        if (error) {
+            console.error('Veri çekme hatası:', error);
+            return;
+        }
 
-     const birlesmis = data.map(sefer => {
-         const detaylar = sefer.sefer_detaylari || [];
+        const birlesmis = data.map(sefer => {
+            const detaylar = sefer.sefer_detaylari || [];
 
-         const statuHesapla = () => {
-             // Eğer tüm noktalar tamamen doluysa, "SEFER TAMAMLANDI" yaz
-             const tumNoktalarTamam = detaylar.length > 0 && detaylar.every(d =>
-                 d.yukleme_varis &&
-                 d.yukleme_cikis &&
-                 d.teslim_varis &&
-                 d.teslim_cikis
-             );
+            const statuHesapla = () => {
+                // Eğer tüm noktalar tamamen doluysa, "SEFER TAMAMLANDI" yaz
+                const tumNoktalarTamam = detaylar.length > 0 && detaylar.every(d =>
+                    d.yukleme_varis &&
+                    d.yukleme_cikis &&
+                    d.teslim_varis &&
+                    d.teslim_cikis
+                );
 
-             if (tumNoktalarTamam) {
-                 return 'SEFER TAMAMLANDI';
-             }
+                if (tumNoktalarTamam) {
+                    return 'SEFER TAMAMLANDI';
+                }
 
-             // Aksi halde nokta bazlı durumlar
-             return detaylar
-                 .map((d, index) => {
-                     const tamamenBos = !d.yukleme_varis && !d.yukleme_cikis && !d.teslim_varis && !d.teslim_cikis;
-                     if (tamamenBos) return null;
+                // Aksi halde nokta bazlı durumlar
+                return detaylar
+                    .map((d, index) => {
+                        const tamamenBos = !d.yukleme_varis && !d.yukleme_cikis && !d.teslim_varis && !d.teslim_cikis;
+                        if (tamamenBos) return null;
 
-                     if (d.teslim_cikis) return `${index + 1}.NOKTADA TAMAMLANDI`;
-                     if (d.teslim_varis) return `${index + 1}.NOKTADA BOŞALTMADA`;
-                     if (d.yukleme_cikis) return `${index + 1}.NOKTADA YOLDA`;
-                     if (d.yukleme_varis) return `${index + 1}.NOKTADA YÜKLEMEDE`;
+                        if (d.teslim_cikis) return `${index + 1}.NOKTADA TAMAMLANDI`;
+                        if (d.teslim_varis) return `${index + 1}.NOKTADA BOŞALTMADA`;
+                        if (d.yukleme_cikis) return `${index + 1}.NOKTADA YOLDA`;
+                        if (d.yukleme_varis) return `${index + 1}.NOKTADA YÜKLEMEDE`;
 
-                     return `${index + 1}.NOKTADA PLAKA ATANDI`;
-                 })
-                 .filter(Boolean)
-                 .join('; ');
-         };
+                        return `${index + 1}.NOKTADA PLAKA ATANDI`;
+                    })
+                    .filter(Boolean)
+                    .join('; ');
+            };
 
-         return {
-             ...sefer,
-             arac_statu: statuHesapla(),
-             nokta_sayisi: detaylar.filter(d =>
-                 Object.values(d).some(v => v !== null && v !== '' && v !== '-')
-             ).length,
-             yukleme_varis: detaylar.map(d => d.yukleme_varis || '-').join('; '),
-             yukleme_cikis: detaylar.map(d => d.yukleme_cikis || '-').join('; '),
-             teslim_varis: detaylar.map(d => d.teslim_varis || '-').join('; '),
-             teslim_cikis: detaylar.map(d => d.teslim_cikis || '-').join('; ')
-         };
-     });
+            return {
+                ...sefer,
+                arac_statu: statuHesapla(),
+                nokta_sayisi: detaylar.filter(d =>
+                    Object.values(d).some(v => v !== null && v !== '' && v !== '-')
+                ).length,
+                yukleme_varis: detaylar.map(d => d.yukleme_varis || '-').join('; '),
+                yukleme_cikis: detaylar.map(d => d.yukleme_cikis || '-').join('; '),
+                teslim_varis: detaylar.map(d => d.teslim_varis || '-').join('; '),
+                teslim_cikis: detaylar.map(d => d.teslim_cikis || '-').join('; ')
+            };
+        });
 
 
 
-  setVeriler(birlesmis);
-   // 🔹 Kolon sıralaması için default kolonları ayarla
-  if (birlesmis.length > 0) {
-  const defaultCols = Object.keys(birlesmis[0])
-    .filter(key =>
-      key !== 'reel_durum' &&
-      key !== 'sefer_detaylari' &&
-      !['yukleme_varis', 'yukleme_cikis', 'teslim_varis', 'teslim_cikis'].includes(key)
-    );
+        setVeriler(birlesmis);
 
-  const savedCols = localStorage.getItem('seferlerColumns');
-  if (savedCols) {
-    try {
-      const parsed = JSON.parse(savedCols);
-      if (Array.isArray(parsed)) {
-        setColumns(parsed);
-      } else {
-        setColumns(defaultCols);
-      }
-    } catch {
-      setColumns(defaultCols);
+        // 🔹 Kolon sıralamasını sadece Supabase görünümü gelmediyse uygula
+        if (birlesmis.length > 0 && columns.length === 0) {
+            const defaultCols = Object.keys(birlesmis[0])
+                .filter(key =>
+                    key !== 'reel_durum' &&
+                    key !== 'sefer_detaylari' &&
+                    !['yukleme_varis', 'yukleme_cikis', 'teslim_varis', 'teslim_cikis'].includes(key)
+                );
+
+            setColumns(defaultCols);
+        }
     }
-  } else {
-    setColumns(defaultCols);
-  }
-}
 
-};
 
 
     const sayacBilgisi = (data) => {
@@ -764,15 +763,29 @@ const splitCell = (value) => {
     </button>
 
     {/* 💾 Görünüm Kaydet Butonu */}
-    <button
-      className="btn btn-clear"
-      onClick={() => {
-        localStorage.setItem('seferlerColumns', JSON.stringify(columns));
-        alert('🧷 Görünüm kaydedildi!');
-      }}
-    >
-      💾 Görünüm Kaydet
-    </button>
+                        <button
+                            className="btn btn-clear"
+                            onClick={async () => {
+                                const kullaniciId = parseInt(localStorage.getItem('kullaniciId'));
+                                if (!kullaniciId) {
+                                    alert('❌ Kullanıcı bilgisi bulunamadı!');
+                                    return;
+                                }
+
+                                const { error } = await supabase
+                                    .from('kullanici_gorunumleri')
+                                    .upsert({ kullanici_id: kullaniciId, gorunum: columns });
+
+                                if (!error) {
+                                    alert('✅ Görünüm kaydedildi!');
+                                } else {
+                                    console.error('Görünüm kayıt hatası:', error);
+                                    alert('❌ Görünüm kaydedilemedi.');
+                                }
+                            }}
+                        >
+                            💾 Görünüm Kaydet
+                        </button>
   </div>
 
   <button

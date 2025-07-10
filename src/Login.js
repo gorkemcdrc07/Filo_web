@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from './supabaseClient';
 import './Login.css';
@@ -24,14 +24,15 @@ function Login() {
         if (error || !data) {
             setHata('Kullanıcı adı veya şifre hatalı.');
         } else {
-            // ✅ Kullanıcı bilgilerini kaydet
             localStorage.setItem('kullaniciAdi', data.kullaniciAdi);
-            localStorage.setItem('kullanici', data.kullanici); // Örn: GÖRKEM ÇADIRCI
-            localStorage.setItem('rol', data.rol);             // Örn: YÖNETİCİ
+            localStorage.setItem('kullanici', data.kullanici);
+            localStorage.setItem('rol', data.rol);
+            localStorage.setItem('kullaniciId', data.id); // 🔥 GÖRÜNÜM İÇİN GEREKLİ
+            localStorage.setItem('girisYapanKullanici', JSON.stringify(data)); // (İsteğe bağlı)
 
-            // ✅ Ana sayfaya yönlendir
             navigate('/anasayfa');
         }
+
     };
 
     return (
