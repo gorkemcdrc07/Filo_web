@@ -2,7 +2,8 @@ import React, { useState, useEffect, useMemo } from 'react';import Select from '
 import { supabase } from '../supabaseClient';
 import './ReelAtananSeferler.css';
 import { useNavigate } from 'react-router-dom';
-
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 
 
@@ -675,6 +676,17 @@ const splitCell = (value) => {
     .map(v => v.trim())
     .filter(v => v !== '');
 };
+    const toDateTimeLocal = (isoString) => {
+        // Eğer cellValue boşsa veya geçersizse bugünün tarihi ver
+        let d = isoString && isoString !== '-' ? new Date(isoString) : new Date();
+
+        if (isNaN(d.getTime())) d = new Date();
+
+        const offset = d.getTimezoneOffset();
+        const local = new Date(d.getTime() - offset * 60000);
+        return local.toISOString().slice(0, 16); // YYYY-MM-DDTHH:mm
+    };
+
 
 
 
@@ -1073,8 +1085,8 @@ const maxRows = Math.max(...splittedColumns.map(col => col.length));
                             key={colIndex}
                             className="detail-item"
                             style={{
-                                flex: '0 1 250px',
-                                maxWidth: '260px',
+                                flex: '0 1 350px',
+                                maxWidth: '360px',
                                 minWidth: '200px',
                                 background: '#334155',
                                 borderRadius: '10px',
@@ -1092,7 +1104,7 @@ const maxRows = Math.max(...splittedColumns.map(col => col.length));
                           className="detail-key"
                           style={{
                             fontWeight: 700,
-                            fontSize: '0.8em',
+                            fontSize: '20px',
                             marginBottom: '6px',
                             color: '#a5b4fc',
                             textTransform: 'uppercase',
@@ -1102,14 +1114,12 @@ const maxRows = Math.max(...splittedColumns.map(col => col.length));
                         </div>
                         <div
                           className="detail-value"
-                          style={{ fontSize: '0.95em', lineHeight: 1.3, color: '#cbd5e1' }}
+                          style={{ fontSize: '20px',fontWeight: 'bold', lineHeight: 1.3, color: '#cbd5e1' }}
                         >
                                 {showTime ? (
-                                    <div style={{ display: 'flex', gap: '6px' }}>
+                                    <div style={{ display: 'flex', gap: '4px' }}>
                                         <input
                                             type="date"
-                                            data-key={key}
-                                            data-index={rowIndex}
                                             value={cellValue?.split('T')[0] || ''}
                                             onChange={(e) => {
                                                 const datePart = e.target.value;
@@ -1118,9 +1128,7 @@ const maxRows = Math.max(...splittedColumns.map(col => col.length));
                                             }}
                                             style={{
                                                 flex: 1,
-                                                boxSizing: 'border-box',
-                                                minWidth: 0,
-                                                fontSize: '0.85em',
+                                                fontSize: '16px',
                                                 padding: '4px 6px',
                                                 backgroundColor: '#475569',
                                                 color: '#e0e7ff',
@@ -1130,9 +1138,7 @@ const maxRows = Math.max(...splittedColumns.map(col => col.length));
                                         />
                                         <input
                                             type="time"
-                                            data-key={key}
-                                            data-index={rowIndex}
-                                            value={cellValue?.split('T')[1] || ''}
+                                            value={cellValue?.split('T')[1] || '00:00'}
                                             onChange={(e) => {
                                                 const timePart = e.target.value;
                                                 const datePart = cellValue?.split('T')[0] || new Date().toISOString().split('T')[0];
@@ -1140,9 +1146,7 @@ const maxRows = Math.max(...splittedColumns.map(col => col.length));
                                             }}
                                             style={{
                                                 flex: 1,
-                                                boxSizing: 'border-box',
-                                                minWidth: 0,
-                                                fontSize: '0.85em',
+                                                fontSize: '16px',
                                                 padding: '4px 6px',
                                                 backgroundColor: '#475569',
                                                 color: '#e0e7ff',
@@ -1154,6 +1158,9 @@ const maxRows = Math.max(...splittedColumns.map(col => col.length));
                                 ) : (
                                     formatCell(cellValue, showTime) || '-'
                                 )}
+
+
+
 
                         </div>
                       </div>
