@@ -12,13 +12,13 @@ function Sidebar() {
 
 
 
-const kullaniciAltMenuler = [
-    { ad: 'Plaka Önerisi', yol: '/plaka-onerisi', ikon: '📋' },
-    { ad: 'Siparişler', yol: '/siparisler', ikon: '🧾' },
-    { ad: 'Reel Atanan Sefer Bilgileri', yol: '/seferler', ikon: '🚛' },
-    { ad: 'Atama Yapan Kullanıcılar', yol: '/atama-kullanicilar', ikon: '🧑‍💼' },
-    { ad: 'Tamamlanan Seferler', yol: '/tamamlanan-seferler', ikon: '✅' },
-];
+    const kullaniciAltMenuler = [
+        { ad: 'PLANLAMA', yol: '/planlama', ikon: '🗓️' },
+        { ad: 'PLAKA ÖNERİSİ', yol: '/plaka-onerisi', ikon: '📋' },
+        { ad: 'AKTİF SEFERLER', yol: '/seferler', ikon: '🚛' },
+        { ad: 'TAMAMLANAN SEFERLER', yol: '/tamamlanan-seferler', ikon: '✅' },
+    ];
+
 
 
     const aracAltMenuler = [

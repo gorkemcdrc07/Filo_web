@@ -1,0 +1,42 @@
+.planlama-sayfasi {
+    padding: 20px;
+    background: #f9f9f9;
+    min-height: 100vh;
+}
+
+.baslik {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #003d5b;
+}
+
+.planlama-wrapper {
+    overflow-x: auto;
+}
+
+.planlama-tablo {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+    .planlama-tablo th, .planlama-tablo td {
+        border: 1px solid #ccc;
+        padding: 8px;
+        text-align: center;
+    }
+
+    .planlama-tablo th {
+        background-color: #003d5b;
+        color: #fff;
+        position: sticky;
+        top: 0;
+    }
+
+    .planlama-tablo td:nth-child(4),
+    .planlama-tablo td:nth-child(5),
+    .planlama-tablo td:nth-child(6),
+    .planlama-tablo td:nth-child(7),
+    .planlama-tablo td:nth-child(15) {
+        background-color: #ffd6d6;
+    }

@@ -9,7 +9,8 @@ import Anasayfa from './Anasayfa';
 import ReelAtananSeferler from './kullanıcıIslemleri/ReelAtananSeferler';
 import Siparisler from './kullanıcıIslemleri/Siparisler';
 import Tamamlananlar from './Tamamlananlar';
-import PlakaOnerisi from './kullanıcıIslemleri/PlakaOnerisi'; // 👈 YENİ SATIR
+import PlakaOnerisi from './kullanıcıIslemleri/PlakaOnerisi';
+import Planlama from './kullanıcıIslemleri/Planlama'; // 👈 YENİ
 
 // Araç Durumları
 import AracYonetimi from './aracDurum/AracYonetimi';
@@ -27,7 +28,8 @@ function App() {
                 <Route path="/anasayfa" element={<Anasayfa />} />
 
                 {/* Kullanıcı İşlemleri */}
-                <Route path="/plaka-onerisi" element={<PlakaOnerisi />} /> {/* 👈 EKLENEN ROUTE */}
+                <Route path="/planlama" element={<Planlama />} /> {/* 👈 PLANLAMA ROUTE */}
+                <Route path="/plaka-onerisi" element={<PlakaOnerisi />} />
                 <Route path="/seferler" element={<ReelAtananSeferler />} />
                 <Route path="/siparisler" element={<Siparisler />} />
                 <Route path="/tamamlanan-seferler" element={<Tamamlananlar />} />

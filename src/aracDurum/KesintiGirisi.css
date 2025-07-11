@@ -1,27 +1,49 @@
 .kesinti-container {
     display: flex;
-    gap: 20px;
-    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 30px;
     justify-content: center;
     padding: 20px;
-    flex-wrap: wrap;
+    background: #f4f6f8;
 }
+
+.geri-btn-kapsayici {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.geri-btn {
+    background: none;
+    border: none;
+    color: #007bff;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+    .geri-btn:hover {
+        color: #0056b3;
+        text-decoration: underline;
+    }
 
 .kesinti-form {
     flex: 1;
     min-width: 300px;
     max-width: 400px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    background: #f9f9f9;
+    background: #fff;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
     .kesinti-form h2 {
         text-align: center;
+        font-size: 22px;
+        margin-bottom: 10px;
     }
 
     .kesinti-form label {
@@ -33,18 +55,26 @@
     .kesinti-form textarea {
         padding: 8px;
         font-size: 14px;
-        border-radius: 5px;
+        border-radius: 6px;
         border: 1px solid #ccc;
         width: 100%;
+        box-sizing: border-box;
+    }
+
+    .kesinti-form textarea {
+        min-height: 60px;
+        resize: vertical;
     }
 
     .kesinti-form button {
         background-color: #007bff;
         color: white;
         padding: 10px;
+        font-weight: bold;
         border: none;
         border-radius: 6px;
         cursor: pointer;
+        transition: 0.2s ease;
     }
 
         .kesinti-form button:hover {
@@ -53,9 +83,20 @@
 
 .kesinti-tablo-wrapper {
     flex: 2;
-    min-width: 500px;
+    min-width: 600px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px solid #eee;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
     overflow-x: auto;
 }
+
+    .kesinti-tablo-wrapper h3 {
+        text-align: center;
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
 
 .kesinti-tablo {
     width: 100%;
@@ -65,7 +106,7 @@
 
     .kesinti-tablo th,
     .kesinti-tablo td {
-        padding: 8px;
+        padding: 10px;
         border: 1px solid #ddd;
         text-align: center;
     }
@@ -86,8 +127,27 @@
         .kesinti-tablo button:hover {
             background-color: #c82333;
         }
+.excel-btn-wrapper {
+    text-align: right;
+    margin-bottom: 10px;
+}
 
-/* Responsive */
+.excel-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+    .excel-btn:hover {
+        background-color: #218838;
+    }
+
+
 @media (max-width: 900px) {
     .kesinti-container {
         flex-direction: column;

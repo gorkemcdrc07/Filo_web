@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { supabase } from '../supabaseClient';
 import './KesintiGirisi.css';
+import * as XLSX from 'xlsx'; // En üste ekle
 
 const BOS_FORM = {
     plaka_treyler: '',
     kesinti_turu: '',
+    neden: '',
     baslangic_tarihi: '',
     bitis_tarihi: '',
     gun_sayisi: '',
@@ -19,7 +21,7 @@ const hesaplaGun = (start, end) => {
     d1.setHours(0, 0, 0, 0);
     d2.setHours(0, 0, 0, 0);
     const fark = (d2 - d1) / (1000 * 60 * 60 * 24);
-    return fark >= 0 ? fark + 1 : 0;
+    return fark >= 0 ? fark : 0; // Başlangıç dahil edilmiyor
 };
 
 function KesintiGirisi() {
@@ -39,14 +41,12 @@ function KesintiGirisi() {
 
     const plakalarGetir = async () => {
         const { data } = await supabase.from('plakalar').select('plaka, treyler');
-        if (data) {
-            setPlakalar(data);
-        }
+        if (data) setPlakalar(data);
     };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        let yeniForm = { ...form, [name]: value };
+        const yeniForm = { ...form, [name]: value };
 
         if (name === 'baslangic_tarihi' || name === 'bitis_tarihi') {
             const gun = hesaplaGun(yeniForm.baslangic_tarihi, yeniForm.bitis_tarihi);
@@ -58,9 +58,9 @@ function KesintiGirisi() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const { plaka_treyler, baslangic_tarihi, bitis_tarihi, kesinti_turu, neden, gun_sayisi, aciklama } = form;
 
-        const { plaka_treyler, baslangic_tarihi, bitis_tarihi, kesinti_turu, gun_sayisi, aciklama } = form;
-        if (!plaka_treyler || !baslangic_tarihi || !bitis_tarihi || !kesinti_turu) {
+        if (!plaka_treyler || !baslangic_tarihi || !bitis_tarihi || !kesinti_turu || !neden) {
             alert("Lütfen tüm gerekli alanları doldurun.");
             return;
         }
@@ -68,27 +68,25 @@ function KesintiGirisi() {
         const kullanici = getMevcutKullanici();
         const bugun = new Date().toISOString().split("T")[0];
 
-        // 1️⃣ Kesinti tablosuna ekle
-        const { error: insertError } = await supabase.from('kesintiler').insert([{
+        const { error } = await supabase.from('kesintiler').insert([{
             plaka_treyler,
+            kesinti_turu,
+            neden,
             baslangic_tarihi,
             bitis_tarihi,
             gun_sayisi,
-            kesinti_turu,
             aciklama,
             ekleyen_kullanici: kullanici,
             eklenme_tarihi: new Date().toISOString()
         }]);
 
-        if (insertError) {
+        if (error) {
             alert("Kesinti eklenemedi.");
             return;
         }
 
-        // 2️⃣ Plakalar tablosunu güncelle
         const [plaka, treyler] = plaka_treyler.split(' - ');
         if (bitis_tarihi >= bugun) {
-            // Geçerli veya ileri tarihli kesinti → aktif olarak kabul edilir
             await supabase.from('plakalar')
                 .update({
                     statu: 'KESİNTİDE',
@@ -103,25 +101,16 @@ function KesintiGirisi() {
         verileriGetir();
     };
 
-
     const handleSil = async (id) => {
         const onay = window.confirm("Kesinti kaydı silinsin mi?");
         if (!onay) return;
 
-        // Önce silinecek kaydı bul
         const { data: silinecek } = await supabase.from('kesintiler').select('*').eq('id', id).single();
-        if (!silinecek) {
-            alert("Kayıt bulunamadı.");
-            return;
-        }
+        if (!silinecek) return alert("Kayıt bulunamadı.");
 
-        // Kesintiler tablosundan sil
         await supabase.from('kesintiler').delete().eq('id', id);
 
-        // Plakayı ayır
         const [plaka, treyler] = silinecek.plaka_treyler.split(' - ');
-
-        // plakalar tablosunu sıfırla
         await supabase.from('plakalar')
             .update({
                 statu: 'Aktif',
@@ -133,10 +122,36 @@ function KesintiGirisi() {
 
         verileriGetir();
     };
+    const handleExportExcel = () => {
+        if (kesintiler.length === 0) {
+            alert("Aktarılacak kayıt bulunamadı.");
+            return;
+        }
 
+        const worksheet = XLSX.utils.json_to_sheet(kesintiler.map(k => ({
+            Plaka: k.plaka_treyler,
+            Tür: k.kesinti_turu,
+            Neden: k.neden,
+            Başlangıç: new Date(k.baslangic_tarihi).toLocaleDateString('tr-TR'),
+            Bitiş: new Date(k.bitis_tarihi).toLocaleDateString('tr-TR'),
+            Gün: k.gun_sayisi,
+            Açıklama: k.aciklama,
+            Ekleyen: k.ekleyen_kullanici,
+            Eklenme_Tarihi: new Date(k.eklenme_tarihi).toLocaleString('tr-TR'),
+        })));
+
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, "Kesinti Kayıtları");
+
+        XLSX.writeFile(workbook, "kesinti_kayitlari.xlsx");
+    };
 
     return (
         <div className="kesinti-container">
+            <div className="geri-btn-kapsayici">
+                <button className="geri-btn" onClick={() => window.history.back()}>← Geri</button>
+            </div>
+
             <form onSubmit={handleSubmit} className="kesinti-form">
                 <h2>Kesinti Girişi</h2>
 
@@ -157,6 +172,13 @@ function KesintiGirisi() {
                     <option value="Kaza">Kaza</option>
                 </select>
 
+                <label>Kesinti Nedeni</label>
+                <select name="neden" value={form.neden} onChange={handleChange} required>
+                    <option value="">Neden Seçin</option>
+                    <option value="Tedarikçi Kaynaklı">Tedarikçi Kaynaklı</option>
+                    <option value="Odak Kaynaklı">Odak Kaynaklı</option>
+                </select>
+
                 <label>Başlangıç Tarihi</label>
                 <input type="date" name="baslangic_tarihi" value={form.baslangic_tarihi} onChange={handleChange} required />
 
@@ -173,12 +195,18 @@ function KesintiGirisi() {
             </form>
 
             <div className="kesinti-tablo-wrapper">
+                <div className="excel-btn-wrapper">
+                    <button className="excel-btn" onClick={handleExportExcel}>Excel'e Aktar</button>
+                </div>
+
                 <h3>Kesinti Kayıtları</h3>
+
                 <table className="kesinti-tablo">
                     <thead>
                         <tr>
                             <th>Plaka</th>
                             <th>Tür</th>
+                            <th>Neden</th>
                             <th>Başlangıç</th>
                             <th>Bitiş</th>
                             <th>Gün</th>
@@ -189,14 +217,15 @@ function KesintiGirisi() {
                     </thead>
                     <tbody>
                         {kesintiler.length === 0 ? (
-                            <tr><td colSpan="8">Kayıt bulunamadı.</td></tr>
+                            <tr><td colSpan="9">Kayıt bulunamadı.</td></tr>
                         ) : (
                             kesintiler.map((k) => (
                                 <tr key={k.id}>
                                     <td>{k.plaka_treyler}</td>
                                     <td>{k.kesinti_turu}</td>
-                                    <td>{k.baslangic_tarihi}</td>
-                                    <td>{k.bitis_tarihi}</td>
+                                    <td>{k.neden}</td>
+                                    <td>{new Date(k.baslangic_tarihi).toLocaleDateString('tr-TR')}</td>
+                                    <td>{new Date(k.bitis_tarihi).toLocaleDateString('tr-TR')}</td>
                                     <td>{k.gun_sayisi}</td>
                                     <td>{k.aciklama}</td>
                                     <td>{k.ekleyen_kullanici}</td>
@@ -207,6 +236,7 @@ function KesintiGirisi() {
                     </tbody>
                 </table>
             </div>
+
         </div>
     );
 }

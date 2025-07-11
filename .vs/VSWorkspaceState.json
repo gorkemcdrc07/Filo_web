@@ -3,9 +3,8 @@
     "",
     "\\server",
     "\\src",
-    "\\src\\components",
     "\\src\\kullanıcıIslemleri"
   ],
-  "SelectedNode": "\\src\\Login.js",
+  "SelectedNode": "\\src\\App.js",
   "PreviewInSolutionExplorer": false
 }
