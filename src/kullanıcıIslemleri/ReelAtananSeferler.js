@@ -34,6 +34,8 @@ function ReelAtananSeferler() {
     const [noktaSayisi, setNoktaSayisi] = useState('');
     const [columns, setColumns] = useState([]);
     const navigate = useNavigate();
+    const [seferNoTipi, setSeferNoTipi] = useState(''); // '', 'BOS', 'SFR'
+
 
 
     const [draggedColumn, setDraggedColumn] = useState(null);
@@ -399,33 +401,34 @@ const aracStatuOptions = useMemo(() => {
     setIsLoading(false);
   }
 };
-const applyFilters = (data) => {
-  const icindeVar = (deger, filtre) =>
-    filtre.trim() === '' || (deger || '').toLowerCase().includes(filtre.trim().toLowerCase());
+    const applyFilters = (data) => {
+        const icindeVar = (deger, filtre) =>
+            filtre.trim() === '' || (deger || '').toLowerCase().includes(filtre.trim().toLowerCase());
 
-  const esitMi = (deger, filtre) =>
-    filtre.trim() === '' || (deger || '').toLowerCase() === filtre.trim().toLowerCase();
+        const esitMi = (deger, filtre) =>
+            filtre.trim() === '' || (deger || '').toLowerCase() === filtre.trim().toLowerCase();
 
-  const sayiUyarla = (deger) => {
-    const num = parseInt(deger);
-    return isNaN(num) ? null : num;
-  };
+        const sayiUyarla = (deger) => {
+            const num = parseInt(deger);
+            return isNaN(num) ? null : num;
+        };
 
-  return data.filter((item) =>
-    icindeVar(item.plaka, plaka) &&
-    icindeVar(item.musteri_adi, musteriAdi) &&
-    icindeVar(item.proje_adi, projeAdi) &&
-    icindeVar(item.yukleme_noktasi, yuklemeNoktasi) &&
-    icindeVar(item.yukleme_ili, yuklemeIl) &&
-    icindeVar(item.yukleme_ilcesi, yuklemeIlce) &&
-    icindeVar(item.teslim_noktasi, teslimNoktasi) &&
-    icindeVar(item.teslim_ili, teslimIl) &&
-    icindeVar(item.teslim_ilcesi, teslimIlce) &&
-    icindeVar(item.atama_yapan_kullanici, atamaYapan) &&
-    esitMi(item.arac_statu, aracStatu) &&
-    (sayiUyarla(noktaSayisi) === null || item.nokta_sayisi === sayiUyarla(noktaSayisi))
-  );
-};
+        return data.filter((item) =>
+            icindeVar(item.plaka, plaka) &&
+            icindeVar(item.musteri_adi, musteriAdi) &&
+            icindeVar(item.proje_adi, projeAdi) &&
+            icindeVar(item.yukleme_noktasi, yuklemeNoktasi) &&
+            icindeVar(item.yukleme_ili, yuklemeIl) &&
+            icindeVar(item.yukleme_ilcesi, yuklemeIlce) &&
+            icindeVar(item.teslim_noktasi, teslimNoktasi) &&
+            icindeVar(item.teslim_ili, teslimIl) &&
+            icindeVar(item.teslim_ilcesi, teslimIlce) &&
+            icindeVar(item.atama_yapan_kullanici, atamaYapan) &&
+            esitMi(item.arac_statu, aracStatu) &&
+            (sayiUyarla(noktaSayisi) === null || item.nokta_sayisi === sayiUyarla(noktaSayisi)) &&
+            (seferNoTipi === '' || (item.sefer_no || '').toUpperCase().startsWith(seferNoTipi))
+        );
+    };
 
 
 
@@ -749,6 +752,21 @@ const splitCell = (value) => {
                     <label>Bitiş Tarihi</label>
                     <input type="date" value={endDate} onChange={e => setEndDate(e.target.value)} />
                 </div>
+                <div className="filter-block">
+                    <label>SEFER NO TİPİ</label>
+                    <Select
+                        options={[
+                            { label: 'Tümü', value: '' },
+                            { label: 'BOS ile Başlayan', value: 'BOS' },
+                            { label: 'SFR ile Başlayan', value: 'SFR' },
+                        ]}
+                        value={{ label: seferNoTipi || 'Tümü', value: seferNoTipi }}
+                        onChange={e => setSeferNoTipi(e?.value || '')}
+                        isClearable={false}
+                        classNamePrefix="Select"
+                    />
+                </div>
+
 
               <div className="filter-buttons">
   <div className="left-buttons">

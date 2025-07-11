@@ -1,42 +1,136 @@
+/* Sayfa ve genel yapı */
 .planlama-sayfasi {
-    padding: 20px;
-    background: #f9f9f9;
+    padding: 32px;
+    background: #f4f6f8;
     min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* Başlık */
 .baslik {
-    font-size: 28px;
+    font-size: 30px;
+    font-weight: 700;
+    color: #1e2a38;
     margin-bottom: 20px;
-    color: #003d5b;
 }
 
+/* Buton grubu */
+.butonlar {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+    .butonlar button {
+        padding: 10px 20px;
+        background-color: #2563eb;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-weight: 500;
+        font-size: 14px;
+        cursor: pointer;
+        transition: 0.2s ease;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+        .butonlar button:hover {
+            background-color: #1d4ed8;
+            transform: translateY(-1px);
+        }
+
+/* Filtre alanı */
+.filtre-alani {
+    margin-bottom: 24px;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+    .filtre-alani input,
+    .filtre-alani select {
+        padding: 8px 12px;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        background-color: #ffffff;
+        min-width: 200px;
+    }
+
+/* Tablo sarmalayıcı */
 .planlama-wrapper {
     overflow-x: auto;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    max-height: 70vh;
 }
 
+/* Tablo */
 .planlama-tablo {
     width: 100%;
     border-collapse: collapse;
-    font-size: 14px;
+    font-size: 25px; /* ⬅️ default font büyütüldü */
+    min-width: 1200px;
 }
 
-    .planlama-tablo th, .planlama-tablo td {
-        border: 1px solid #ccc;
-        padding: 8px;
+    /* Tablo başlığı */
+    .planlama-tablo thead th {
+        background-color: #1e293b;
+        color: white;
+        padding: 12px 10px;
         text-align: center;
-    }
-
-    .planlama-tablo th {
-        background-color: #003d5b;
-        color: #fff;
         position: sticky;
         top: 0;
+        z-index: 2;
+        white-space: nowrap;
+        font-size: 17px; /* ⬅️ başlık font büyütüldü */
     }
 
-    .planlama-tablo td:nth-child(4),
-    .planlama-tablo td:nth-child(5),
-    .planlama-tablo td:nth-child(6),
-    .planlama-tablo td:nth-child(7),
-    .planlama-tablo td:nth-child(15) {
-        background-color: #ffd6d6;
+    /* Tablo hücreleri */
+    .planlama-tablo td {
+        padding: 10px 8px;
+        font-size: 16px; /* ⬅️ hücre font büyütüldü */
+        border-bottom: 1px solid #e2e8f0;
+        background-color: #fff;
+        text-align: left;
+        vertical-align: middle;
+        cursor: pointer;
     }
+
+    /* Hücre içindeki inputlar */
+    .planlama-tablo input {
+        width: 100%;
+        padding: 8px 10px;
+        font-size: 30px; /* ⬅️ input font büyütüldü */
+        border: 1px solid transparent;
+        border-radius: 4px;
+        background-color: transparent;
+        transition: 0.2s ease;
+        font-family: inherit;
+    }
+
+        .planlama-tablo input:focus {
+            border-color: #2563eb;
+            background-color: #fff;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+        }
+    .planlama-tablo input {
+        width: 100%;
+        padding: 5px 6px;
+        font-size: 20px;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        background-color: transparent;
+        transition: 0.2s ease;
+        font-family: inherit;
+    }
+
+        .planlama-tablo input:focus {
+            border-color: #2563eb;
+            background-color: #fff;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+        }
+

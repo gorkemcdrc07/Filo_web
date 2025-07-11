@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\Gorkem.Cadirci\\ftsweb\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Gorkem.Cadirci\\ftsweb\\src\\aracDurum\\IzinGirisi.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\aracDurum\\IzinGirisi.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Gorkem.Cadirci\\ftsweb\\src\\kullan\u0131c\u0131Islemleri\\Planlama.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\kullan\u0131c\u0131Islemleri\\Planlama.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Gorkem.Cadirci\\ftsweb\\src\\aracDurum\\IzinGirisi.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\aracDurum\\IzinGirisi.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Gorkem.Cadirci\\ftsweb\\src\\kullan\u0131c\u0131Islemleri\\Planlama.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\kullan\u0131c\u0131Islemleri\\Planlama.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     }
   ],
   "DocumentGroupContainers": [
@@ -31,27 +31,27 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "IzinGirisi.css",
-              "DocumentMoniker": "C:\\Users\\Gorkem.Cadirci\\ftsweb\\src\\aracDurum\\IzinGirisi.css",
-              "RelativeDocumentMoniker": "src\\aracDurum\\IzinGirisi.css",
-              "ToolTip": "C:\\Users\\Gorkem.Cadirci\\ftsweb\\src\\aracDurum\\IzinGirisi.css",
-              "RelativeToolTip": "src\\aracDurum\\IzinGirisi.css",
-              "ViewState": "AgIAALAAAAAAAAAAAAAqwOgAAAAAAAAAAAAAAA==",
+              "Title": "Planlama.css",
+              "DocumentMoniker": "C:\\Users\\Gorkem.Cadirci\\ftsweb\\src\\kullan\u0131c\u0131Islemleri\\Planlama.css",
+              "RelativeDocumentMoniker": "src\\kullan\u0131c\u0131Islemleri\\Planlama.css",
+              "ToolTip": "C:\\Users\\Gorkem.Cadirci\\ftsweb\\src\\kullan\u0131c\u0131Islemleri\\Planlama.css",
+              "RelativeToolTip": "src\\kullan\u0131c\u0131Islemleri\\Planlama.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-07-10T11:04:30.009Z",
+              "WhenOpened": "2025-07-11T07:29:55.626Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "IzinGirisi.js",
-              "DocumentMoniker": "C:\\Users\\Gorkem.Cadirci\\ftsweb\\src\\aracDurum\\IzinGirisi.js",
-              "RelativeDocumentMoniker": "src\\aracDurum\\IzinGirisi.js",
-              "ToolTip": "C:\\Users\\Gorkem.Cadirci\\ftsweb\\src\\aracDurum\\IzinGirisi.js",
-              "RelativeToolTip": "src\\aracDurum\\IzinGirisi.js",
-              "ViewState": "AgIAAKQAAAAAAAAAAAAswNoAAAAAAAAAAAAAAA==",
+              "Title": "Planlama.js",
+              "DocumentMoniker": "C:\\Users\\Gorkem.Cadirci\\ftsweb\\src\\kullan\u0131c\u0131Islemleri\\Planlama.js",
+              "RelativeDocumentMoniker": "src\\kullan\u0131c\u0131Islemleri\\Planlama.js",
+              "ToolTip": "C:\\Users\\Gorkem.Cadirci\\ftsweb\\src\\kullan\u0131c\u0131Islemleri\\Planlama.js",
+              "RelativeToolTip": "src\\kullan\u0131c\u0131Islemleri\\Planlama.js",
+              "ViewState": "AgIAABUAAAAAAAAAAAAkwEsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-07-10T10:58:17.674Z",
+              "WhenOpened": "2025-07-11T07:28:13.769Z",
               "EditorCaption": ""
             }
           ]
