@@ -34,6 +34,9 @@ function ReelAtananSeferler() {
     const [columns, setColumns] = useState([]);
     const navigate = useNavigate();
     const [seferNoTipi, setSeferNoTipi] = useState(''); // '', 'BOS', 'SFR'
+    const kullaniciAdi = localStorage.getItem('kullaniciAdi')?.toUpperCase();
+    const senkronizeYetkili = kullaniciAdi === 'ADMIN' || kullaniciAdi === 'SELİN';
+
 
 
 
@@ -755,9 +758,11 @@ const splitCell = (value) => {
     <button className="btn btn-list" onClick={fetchFromDB}>
       📥 Listele
     </button>
-    <button className="btn btn-sync" onClick={senkronizeEt}>
-      🔄 Senkronize Et
-    </button>
+                        {senkronizeYetkili && (
+                            <button className="btn btn-sync" onClick={senkronizeEt}>
+                                🔄 Senkronize Et
+                            </button>
+                        )}
     <button className="btn btn-save" disabled={saving} onClick={detaylariKaydet}>
       💾 {saving ? 'Kaydediliyor...' : 'Detayları Kaydet'}
     </button>
