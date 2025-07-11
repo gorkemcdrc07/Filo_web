@@ -18,8 +18,6 @@ function ReelAtananSeferler() {
   const [successCount, setSuccessCount] = useState(0);
   const [expandedRows, setExpandedRows] = useState(new Set());
     const [saving, setSaving] = useState(false);
-    const [uyariMesaji, setUyariMesaji] = useState('');
-    const [uyariGoster, setUyariGoster] = useState(false);
     const [aracStatu, setAracStatu] = useState('');
     const [plaka, setPlaka] = useState('');
     const [musteriAdi, setMusteriAdi] = useState('');
@@ -588,30 +586,7 @@ const detaylariKaydet = async () => {
                         (teslimVaris && yuklemeCikis && teslimVaris <= yuklemeCikis) ||
                         (yuklemeCikis && yuklemeVaris && yuklemeCikis <= yuklemeVaris);
 
-                    if (zamanHatali) {
-                        splitMap[key][rowIndex] = '';
-                        updated[key] = splitMap[key].join('; ');
-
-                        let aciklama = `❌ <b>${i + 1}. Nokta</b> için zaman sıralaması hatalı!<br /><br />`;
-
-                        if (teslimCikis && teslimVaris && teslimCikis <= teslimVaris) {
-                            aciklama += `📌 <b>Teslim ÇIKIŞ</b> (${formatDate(teslimCikis)}) → <b>Teslim VARIŞ</b> (${formatDate(teslimVaris)}) tarihinden önce olamaz.<br />`;
-                            aciklama += `👉 Lütfen Teslim ÇIKIŞ tarihini daha geç bir tarih olarak girin.<br /><br />`;
-                        }
-                        if (teslimVaris && yuklemeCikis && teslimVaris <= yuklemeCikis) {
-                            aciklama += `📌 <b>Teslim VARIŞ</b> (${formatDate(teslimVaris)}) → <b>Yükleme ÇIKIŞ</b> (${formatDate(yuklemeCikis)}) tarihinden önce olamaz.<br />`;
-                            aciklama += `👉 Lütfen Teslim VARIŞ tarihini daha geç bir tarih olarak girin.<br /><br />`;
-                        }
-                        if (yuklemeCikis && yuklemeVaris && yuklemeCikis <= yuklemeVaris) {
-                            aciklama += `📌 <b>Yükleme ÇIKIŞ</b> (${formatDate(yuklemeCikis)}) → <b>Yükleme VARIŞ</b> (${formatDate(yuklemeVaris)}) tarihinden önce olamaz.<br />`;
-                            aciklama += `👉 Lütfen Yükleme ÇIKIŞ tarihini daha geç bir tarih olarak girin.`;
-                        }
-
-                        setUyariMesaji(aciklama.trim());
-                        setUyariGoster(true);
-                        setTimeout(() => setUyariGoster(false), 6000);
-                        return updated;
-                    }
+                   
                 }
 
                 // ✅ Statü hesaplama
@@ -701,6 +676,9 @@ const splitCell = (value) => {
     .filter(v => v !== '');
 };
 
+
+
+
     return (
         <div className="reel-wrapper">
             {/* ← Geri Butonu */}
@@ -713,14 +691,6 @@ const splitCell = (value) => {
                 </button>
             </div>
 
-            {uyariGoster && (
-                <div className="uyari-popup">
-                    <div className="uyari-icerik">
-                        <strong>⚠ Uyarı</strong>
-                        <p dangerouslySetInnerHTML={{ __html: uyariMesaji }} />
-                    </div>
-                </div>
-            )}
 
             {isLoading && (
                 <div className="loading-overlay">
@@ -1092,25 +1062,32 @@ const maxRows = Math.max(...splittedColumns.map(col => col.length));
                 <div
                   key={rowIndex}
                   className="detail-row-item"
-                  style={{ display: 'flex', gap: '16px', marginBottom: '12px' }}
+                  style={{ display: 'flex', gap: '6px', marginBottom: '12px' }}
                 >
                   {detailKeys.map((key, colIndex) => {
                     const showTime = ['yukleme_varis', 'yukleme_cikis', 'teslim_varis', 'teslim_cikis'].includes(key);
                     const cellValue = splittedColumns[colIndex][rowIndex] || '';
 
                     return (
-                      <div
-                        key={colIndex}
-                        className="detail-item"
-                        style={{
-                          flex: 1,
-                          background: '#334155',
-                          borderRadius: '8px',
-                          padding: '12px 16px',
-                          boxShadow: '0 2px 8px rgba(30, 41, 59, 0.4)',
-                          color: '#e0e7ff',
-                        }}
-                      >
+                        <div
+                            key={colIndex}
+                            className="detail-item"
+                            style={{
+                                flex: '0 1 250px',
+                                maxWidth: '260px',
+                                minWidth: '200px',
+                                background: '#334155',
+                                borderRadius: '10px',
+                                padding: '8px 10px',
+                                boxShadow: '0 1px 4px rgba(30, 41, 59, 0.2)',
+                                color: '#e0e7ff',
+                                overflow: 'hidden',          // <-- taşmayı engeller
+                            }}
+
+
+
+                        >
+
                         <div
                           className="detail-key"
                           style={{
@@ -1127,24 +1104,57 @@ const maxRows = Math.max(...splittedColumns.map(col => col.length));
                           className="detail-value"
                           style={{ fontSize: '0.95em', lineHeight: 1.3, color: '#cbd5e1' }}
                         >
-                          {showTime ? (
-                            <input
-                              type="datetime-local"
-                              value={cellValue ? cellValue.substring(0, 16) : ''}
-                              onChange={e => handleDetailChange(v.sefer_no, rowIndex, key, e.target.value)}
-                              style={{
-                                width: '100%',
-                                backgroundColor: '#475569',
-                                color: '#e0e7ff',
-                                border: 'none',
-                                borderRadius: '4px',
-                                padding: '6px 8px',
-                                fontSize: '0.95em',
-                              }}
-                            />
-                          ) : (
-                            formatCell(cellValue, showTime) || '-'
-                          )}
+                                {showTime ? (
+                                    <div style={{ display: 'flex', gap: '6px' }}>
+                                        <input
+                                            type="date"
+                                            data-key={key}
+                                            data-index={rowIndex}
+                                            value={cellValue?.split('T')[0] || ''}
+                                            onChange={(e) => {
+                                                const datePart = e.target.value;
+                                                const timePart = cellValue?.split('T')[1] || '00:00';
+                                                handleDetailChange(v.sefer_no, rowIndex, key, `${datePart}T${timePart}`);
+                                            }}
+                                            style={{
+                                                flex: 1,
+                                                boxSizing: 'border-box',
+                                                minWidth: 0,
+                                                fontSize: '0.85em',
+                                                padding: '4px 6px',
+                                                backgroundColor: '#475569',
+                                                color: '#e0e7ff',
+                                                border: 'none',
+                                                borderRadius: '4px',
+                                            }}
+                                        />
+                                        <input
+                                            type="time"
+                                            data-key={key}
+                                            data-index={rowIndex}
+                                            value={cellValue?.split('T')[1] || ''}
+                                            onChange={(e) => {
+                                                const timePart = e.target.value;
+                                                const datePart = cellValue?.split('T')[0] || new Date().toISOString().split('T')[0];
+                                                handleDetailChange(v.sefer_no, rowIndex, key, `${datePart}T${timePart}`);
+                                            }}
+                                            style={{
+                                                flex: 1,
+                                                boxSizing: 'border-box',
+                                                minWidth: 0,
+                                                fontSize: '0.85em',
+                                                padding: '4px 6px',
+                                                backgroundColor: '#475569',
+                                                color: '#e0e7ff',
+                                                border: 'none',
+                                                borderRadius: '4px',
+                                            }}
+                                        />
+                                    </div>
+                                ) : (
+                                    formatCell(cellValue, showTime) || '-'
+                                )}
+
                         </div>
                       </div>
                     );
